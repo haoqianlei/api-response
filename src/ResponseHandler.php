@@ -35,17 +35,17 @@ trait ResponseHandler
     }
 
     /**
-     * Notes:[错误请求]
-     * Desc: 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，具体看你是否配置了文字对应关系
+     * Notes:[自定义失败消息通知]
+     * Desc: 这个方法，默认返回成功。data 数据默认为 null，msg 信息自行控制
      * User: Back
      * Date: 2021/6/4
-     * Time: 18:20
-     * @param $api_code
+     * Time: 18:19
+     * @param $msg
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function respondBadRequest($api_code)
+    public function respondWithErrorMessage($api_code, $msg = null)
     {
-        return $this->respondWithError($api_code, 400);
+        return $this->respondWithError($api_code, 400, $msg);
     }
 
     /**
@@ -58,9 +58,27 @@ trait ResponseHandler
      * @param $http_code
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function respondWithError($api_code, $http_code)
+    public function respondWithError($api_code, $http_code, $msg = null)
     {
-        return ApiResponse::asError($api_code)->withHttpCode($http_code)->build();
+        $respond = ApiResponse::asError($api_code)->withHttpCode($http_code);
+        if (!is_null($msg)) {
+            $respond->withMessage($msg);
+        }
+        return $respond->build();
+    }
+
+    /**
+     * Notes:[错误请求]
+     * Desc: 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，具体看你是否配置了文字对应关系
+     * User: Back
+     * Date: 2021/6/4
+     * Time: 18:20
+     * @param $api_code
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function respondBadRequest($api_code)
+    {
+        return $this->respondWithError($api_code, 400);
     }
 
     /**
