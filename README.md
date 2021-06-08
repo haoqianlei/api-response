@@ -37,107 +37,35 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResponseHandler;
 }
 ```
-3. 方法
+3. 在控制器中使用得方法，前提是必须拿`app/Http/Controllers/Controller.php`作为父类，代码编写方式请自行查看`你的项目/vendor/back/api-response/ResponseHandler.php`
 ```php
-/**
-     * Notes:[成功通知]
-     * Desc: 这个方法，必须传递 data 数据，msg 可以自己进行控制
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:19
-     * @param  array  $data
-     * @param  null  $msg
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respond($data = null, $msg = null)
-    {
-        return ApiResponse::asSuccess()->withData($data)->withMessage($msg)->build();
-    }
+// 成功通知
+// 这个方法， data，msg 可以自己进行控制可选
+$this->respond($data, $msg);
 
-    /**
-     * Notes:[自定义成功消息通知]
-     * Desc: 这个方法，默认返回成功。data 数据默认为 null，msg 信息自行控制
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:19
-     * @param $msg
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondWithMessage($msg)
-    {
-        return ApiResponse::asSuccess()->withMessage($msg)->build();
-    }
+// 自定义成功消息通知
+// 这个方法，默认返回成功。data 数据默认为 null，msg 信息自行控制
+$this->respondWithMessage($msg);
 
-    /**
-     * Notes:[错误请求]
-     * Desc: 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，具体看你是否配置了文字对应关系
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:20
-     * @param $api_code
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondBadRequest($api_code)
-    {
-        return $this->respondWithError($api_code, 400);
-    }
-    
-    /**
-     * Notes:[自定义失败消息通知]
-     * Desc: 这个方法，默认返回成功。data 数据默认为 null，msg 信息自行控制
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:19
-     * @param $msg
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondWithErrorMessage($api_code, $msg = null)
-    {
-        return $this->respondWithError($api_code, 400, $msg);
-    }
-    
-    /**
-     * Notes:[错误提示]
-     * Desc: 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，可以控制 http_code 必传。比如 人脸识别失败，我要返回 200 状态码。
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:20
-     * @param $api_code
-     * @param $http_code
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondWithError($api_code, $http_code)
-    {
-        return ApiResponse::asError($api_code)->withHttpCode($http_code)->build();
-    }
+// 错误方法
+// 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，具体看你是否配置了文字对应关系
+$this->respondBadRequest($api_code);
 
-    /**
-     * Notes:[账号密码验证失败]
-     * Desc: 账号密码错误，或者登录失效都可以是用此方法
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:20
-     * @param $api_code
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondUnAuthorizedRequest($api_code)
-    {
-        return $this->respondWithError($api_code, 401);
-    }
+// 自定义错误消息通知
+// 这个方法，默认返回成功。$api_code 数据必传，msg 信息自行控制，如果不传默认去找 $api_code 对应得消息通知
+$this->respondWithErrorMessage($api_code, $msg);
 
-    /**
-     * Notes:[数据不存在]
-     * Desc: 数据不存在时可以使用此方法
-     * User: Back
-     * Date: 2021/6/4
-     * Time: 18:20
-     * @param $api_code
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function respondNotFound($api_code)
-    {
-        return $this->respondWithError($api_code, 404);
-    }
+// 错误提示
+// 错误方法，可以传递 api_code，系统根据 api_code 必传自行查找对应的文字说明，可以控制 http_code 必传。比如 人脸识别失败，我要返回 200 状态码。    
+$this->respondWithError($api_code, $http_code);
+
+// 身份验证失败
+// 如果账号密码错误，或者登录失效都可以是用此方法，参数必传
+$this->respondUnAuthorizedRequest($api_code); 
+
+// 数据不存在
+// 数据不存在时可以使用此方法，参数必传
+$this->respondNotFound($api_code);
 ```
 
 4.接管异常处理，修改`app/Exceptions/Handler.php`
