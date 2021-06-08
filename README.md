@@ -81,7 +81,21 @@ class Controller extends BaseController
     {
         return $this->respondWithError($api_code, 400);
     }
-
+    
+    /**
+     * Notes:[自定义失败消息通知]
+     * Desc: 这个方法，默认返回成功。data 数据默认为 null，msg 信息自行控制
+     * User: Back
+     * Date: 2021/6/4
+     * Time: 18:19
+     * @param $msg
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function respondWithErrorMessage($api_code, $msg = null)
+    {
+        return $this->respondWithError($api_code, 400, $msg);
+    }
+    
     /**
      * Notes:[错误提示]
      * Desc: 错误方法，可以传递 api_code，系统根据 api_code 自行查找对应的文字说明，可以控制 http_code 必传。比如 人脸识别失败，我要返回 200 状态码。
