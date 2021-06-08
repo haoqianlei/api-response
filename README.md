@@ -20,8 +20,24 @@ composer require back/api-response
 ```SHELL
  php artisan vendor:publish --provider="MarcinOrlowski\ResponseBuilder\ResponseBuilderServiceProvider"
 ```
+2. 在`app/Http/Controllers/Controller.php`
+```PHP
+namespace App\Http\Controllers;
 
-2.接管异常处理，修改`app/Exceptions/Handler.php`
+use Back\ApiResponse\ResponseHandler; // 引入
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
+{
+    // 引入 ResponseHandler Trait
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResponseHandler;
+}
+```
+
+3.接管异常处理，修改`app/Exceptions/Handler.php`
 
 1. 引入
 
