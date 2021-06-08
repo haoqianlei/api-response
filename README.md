@@ -20,7 +20,8 @@ composer require back/api-response
 ```SHELL
  php artisan vendor:publish --provider="MarcinOrlowski\ResponseBuilder\ResponseBuilderServiceProvider"
 ```
-2. 在`app/Http/Controllers/Controller.php`
+2. 修改`app/Http/Controllers/Controller.php`
+
 ```PHP
 namespace App\Http\Controllers;
 
@@ -40,13 +41,11 @@ class Controller extends BaseController
 3.接管异常处理，修改`app/Exceptions/Handler.php`
 
 1. 引入
-
 ```php
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 ```
 
 2. 如果没有`render`方法，那么就增加这个方法。如果有那么修改此方法为下面内容
-
 ```PHP
 public function render($request, Throwable $e)
 {
