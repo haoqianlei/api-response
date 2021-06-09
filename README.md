@@ -79,7 +79,7 @@ use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 ```PHP
 public function render($request, Throwable $e)
 {
-    return ExceptionHandlerHelper::render($request, $e);
+    return BackExceptionHandler::render($request, $e);
 }
 ```
 
