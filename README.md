@@ -72,7 +72,7 @@ $this->respondNotFound($api_code);
 
 1. 引入
 ```php
-use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
+use Back\ApiResponse\Exceptions\BackExceptionHandler;
 ```
 
 2. 如果没有`render`方法，那么就增加这个方法。如果有那么修改此方法为下面内容
