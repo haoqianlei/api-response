@@ -68,6 +68,11 @@ class BackExceptionHandler extends ExceptionHandlerHelper
             $error_message = current($errors[key($errors)]);
         }
 
+        // 判断配置文件中的 api_code 是否存在与 map，如果存在那么就使用 api_code 对应的中文说明
+        if (array_key_exists($api_code, Config::get(RB::CONF_KEY_MAP))) {
+            $error_message = Config::get(RB::CONF_KEY_MAP)[$api_code];
+        }
+        
         return RB::asError($api_code)
             ->withMessage($error_message)
             ->withHttpCode($http_code)
