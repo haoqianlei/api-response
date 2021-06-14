@@ -4,10 +4,15 @@ namespace Back\ApiResponse\Exceptions;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
+use MarcinOrlowski\ResponseBuilder\BaseApiCodes;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
+use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\DefaultExceptionHandler;
+use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\HttpExceptionHandler;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder as RB;
+use MarcinOrlowski\ResponseBuilder\Util;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class BackExceptionHandler extends ExceptionHandlerHelper
@@ -68,16 +73,92 @@ class BackExceptionHandler extends ExceptionHandlerHelper
             $error_message = current($errors[key($errors)]);
         }
 
-        // 判断配置文件中的 api_code 是否存在与 map，如果存在那么就使用 api_code 对应的中文说明
-        if (array_key_exists($api_code, Config::get(RB::CONF_KEY_MAP))) {
-            $error_message = Config::get(RB::CONF_KEY_MAP)[$api_code];
-        }
-        
         return RB::asError($api_code)
             ->withMessage($error_message)
             ->withHttpCode($http_code)
             ->withData($data)
             ->withDebugData($debug_data)
             ->build();
+    }
+
+    /**
+     * Returns name of exception handler class, configured to process specified exception class or @null if no
+     * exception handler can be determined.
+     *
+     * @param  string  $cls  Name of exception class to handle
+     *
+     * @return array|null
+     */
+    protected static function getHandler(\Throwable $ex): ?array
+    {
+        $result = null;
+
+        $cls = \get_class($ex);
+        if (\is_string($cls)) {
+            $cfg = static::getExceptionHandlerConfig();
+
+            // check for exact class name match...
+            if (\array_key_exists($cls, $cfg)) {
+                $result = $cfg[$cls];
+            } else {
+                // no exact match, then lets try with `instanceof`
+                // Config entries are already sorted by priority.
+                foreach (\array_keys($cfg) as $class_name) {
+                    if ($ex instanceof $class_name) {
+                        $result = $cfg[$class_name];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Returns ExceptionHandlerHelper configration array with user configuration merged into built-in defaults.
+     *
+     * @return array
+     */
+    protected static function getExceptionHandlerConfig(): array
+    {
+        $default_config = [
+            HttpException::class => [
+                'handler' => HttpExceptionHandler::class,
+                'pri' => -100,
+                'config' => [
+                    // used by unauthenticated() to obtain api and http code for the exception
+                    HttpResponse::HTTP_UNAUTHORIZED => [
+                        RB::KEY_API_CODE => BaseApiCodes::EX_AUTHENTICATION_EXCEPTION(),
+                    ],
+                    // Required by ValidationException handler
+                    HttpResponse::HTTP_UNPROCESSABLE_ENTITY => [
+                        RB::KEY_API_CODE => BaseApiCodes::EX_VALIDATION_EXCEPTION(),
+                    ],
+
+                    RB::KEY_DEFAULT => [
+                        RB::KEY_API_CODE => BaseApiCodes::EX_UNCAUGHT_EXCEPTION(),
+                        RB::KEY_HTTP_CODE => HttpResponse::HTTP_INTERNAL_SERVER_ERROR,
+                    ],
+                ],
+                // default config is built into handler.
+            ],
+
+            // default handler is mandatory. `default` entry MUST have both `api_code` and `http_code` set.
+            RB::KEY_DEFAULT => [
+                'handler' => DefaultExceptionHandler::class,
+                'pri' => -127,
+                'config' => [
+                    RB::KEY_API_CODE => BaseApiCodes::EX_UNCAUGHT_EXCEPTION(),
+                    RB::KEY_HTTP_CODE => HttpResponse::HTTP_INTERNAL_SERVER_ERROR,
+                ],
+            ],
+        ];
+        $cfg = Util::mergeConfig($default_config,
+            Config::get(RB::CONF_KEY_EXCEPTION_HANDLER, []));
+        Util::sortArrayByPri($cfg);
+
+        return $cfg;
     }
 }

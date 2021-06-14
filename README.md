@@ -18,7 +18,7 @@ composer require back/api-response
 1. 生成配置文件
 
 ```SHELL
- php artisan vendor:publish --provider="MarcinOrlowski\ResponseBuilder\ResponseBuilderServiceProvider"
+ php artisan vendor:publish --provider="Back\ApiResponse\ApiResponseServiceProvider"
 ```
 2. 修改`app/Http/Controllers/Controller.php`
 
