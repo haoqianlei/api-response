@@ -12,8 +12,8 @@ final class MethodNotAllowedHttpExceptionHandler implements ExceptionHandlerCont
     public function handle(array $user_config, /** @scrutinizer ignore-unused */ \Throwable $ex): ?array
     {
         $defaults = [
-            RB::KEY_API_CODE => BaseApiCodes::EX_VALIDATION_EXCEPTION(),
-            RB::KEY_HTTP_CODE => HttpResponse::HTTP_UNPROCESSABLE_ENTITY,
+            RB::KEY_API_CODE => BaseApiCodes::EX_UNCAUGHT_EXCEPTION(),
+            RB::KEY_HTTP_CODE => HttpResponse::HTTP_INTERNAL_SERVER_ERROR,
         ];
 
         return \array_replace($defaults, $user_config);
