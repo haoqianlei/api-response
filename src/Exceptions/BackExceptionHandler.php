@@ -3,6 +3,7 @@
 namespace Back\ApiResponse\Exceptions;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 use MarcinOrlowski\ResponseBuilder\BaseApiCodes;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
@@ -12,7 +13,6 @@ use MarcinOrlowski\ResponseBuilder\ResponseBuilder as RB;
 use MarcinOrlowski\ResponseBuilder\Util;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class BackExceptionHandler extends ExceptionHandlerHelper
@@ -62,6 +62,14 @@ class BackExceptionHandler extends ExceptionHandlerHelper
                     RB::KEY_LINE => $ex->getLine(),
                 ],
             ];
+        }
+
+        // 判断 map 中是否设置了 map
+        if (Config::get(RB::CONF_KEY_MAP, false)) {
+            $map = Config::get(RB::CONF_KEY_MAP, false);
+            if (array_key_exists($api_code, $map)) {
+                $error_message = $map[$api_code];
+            }
         }
 
         // If this is ValidationException, add all the messages from MessageBag to the data node.
@@ -160,5 +168,51 @@ class BackExceptionHandler extends ExceptionHandlerHelper
         Util::sortArrayByPri($cfg);
 
         return $cfg;
+    }
+
+    /**
+     * Handles given throwable and produces valid HTTP response object.
+     *
+     * @param  \Throwable  $ex  Throwable to be handled.
+     * @param  array  $ex_cfg  ExceptionHandler's config excerpt related to $ex exception type.
+     * @param  int  $fallback_http_code  HTTP code to be assigned to produced $ex related response in
+     *                                       case configuration array lacks own `http_code` value. Default
+     *                                       HttpResponse::HTTP_INTERNAL_SERVER_ERROR
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected static function processException(
+        \Throwable $ex,
+        array $ex_cfg,
+        int $fallback_http_code = HttpResponse::HTTP_INTERNAL_SERVER_ERROR
+    ): HttpResponse {
+        $api_code = $ex_cfg['api_code'];
+        $http_code = $ex_cfg['http_code'] ?? $fallback_http_code;
+        $msg_key = $ex_cfg['msg_key'] ?? null;
+        $msg_enforce = $ex_cfg['msg_enforce'] ?? false;
+
+        // No message key, let's get exception message and if there's nothing useful, fallback to built-in one.
+        $msg = $ex->getMessage();
+        $placeholders = [
+            'api_code' => $api_code,
+            'message' => ($msg !== '') ? $msg : '???',
+        ];
+
+        // shall we enforce error message?
+        if ($msg_enforce) {
+            // yes, please.
+            // there's no msg_key configured for this exact code, so let's obtain our default message
+            $msg = ($msg_key === null) ? static::getErrorMessageForException($ex, $http_code, $placeholders)
+                : Lang::get($msg_key, $placeholders);
+        } else {
+            // nothing enforced, handling pipeline: ex_message -> user_defined_msg -> http_ex -> default
+            if ($msg === '') {
+                $msg = ($msg_key === null) ? static::getErrorMessageForException($ex, $http_code, $placeholders)
+                    : Lang::get($msg_key, $placeholders);
+            }
+        }
+
+        // Lets' try to build the error response with what we have now
+        return static::error($ex, $api_code, $http_code, $msg);
     }
 }
