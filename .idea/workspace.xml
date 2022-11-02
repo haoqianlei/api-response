@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69218b61-5b2b-44fe-aa81-124ef2cfbb30" name="默认变更列表" comment="">
+    <list default="true" id="69218b61-5b2b-44fe-aa81-124ef2cfbb30" name="默认变更列表" comment="默认变更列表">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +173,7 @@
       <workItem from="1623645345839" duration="9417000" />
       <workItem from="1623724970399" duration="3292000" />
       <workItem from="1625033533950" duration="4432000" />
-      <workItem from="1667370040841" duration="180000" />
+      <workItem from="1667370040841" duration="881000" />
     </task>
     <servers />
   </component>
