@@ -13,7 +13,7 @@ final class MethodNotAllowedHttpExceptionHandler implements ExceptionHandlerCont
     {
         $defaults = [
             RB::KEY_API_CODE => BaseApiCodes::EX_UNCAUGHT_EXCEPTION(),
-            RB::KEY_HTTP_CODE => HttpResponse::HTTP_INTERNAL_SERVER_ERROR,
+            RB::KEY_HTTP_CODE => HttpResponse::HTTP_METHOD_NOT_ALLOWED,
         ];
 
         return \array_replace($defaults, $user_config);

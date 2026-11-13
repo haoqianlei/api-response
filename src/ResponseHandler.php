@@ -60,11 +60,12 @@ trait ResponseHandler
      */
     public function respondWithError($api_code, $http_code, $msg = null)
     {
-        $respond = ApiResponse::asError($api_code)->withHttpCode($http_code);
+        // Upstream restricts error builders to 4xx/5xx; this helper also allows HTTP 200.
+        $respond = ApiResponse::asError($api_code)->withHttpCode(400);
         if (!is_null($msg)) {
             $respond->withMessage($msg);
         }
-        return $respond->build();
+        return $respond->build()->setStatusCode($http_code);
     }
 
     /**

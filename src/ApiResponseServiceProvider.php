@@ -11,7 +11,7 @@ class ApiResponseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([__DIR__."/../config/response_builder.php" => config_path('response_builder.php')]);
+        $this->publishes([__DIR__."/../config/response_builder.php" => config_path('response_builder.php')], 'api-response-config');
     }
 
     /**
@@ -19,6 +19,15 @@ class ApiResponseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/response_builder.php', 'response-builder');
+        if (!$this->app->configurationIsCached()) {
+            $defaults = require __DIR__.'/../config/response_builder.php';
+            $this->app['config']->set('response_builder', \MarcinOrlowski\ResponseBuilder\Util::mergeConfig(
+                $defaults,
+                $this->app['config']->get('response_builder', [])
+            ));
+        }
+        $this->app->bind('api-response', function () {
+            return ApiResponse::asSuccess();
+        });
     }
 }

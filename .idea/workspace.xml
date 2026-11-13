@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69218b61-5b2b-44fe-aa81-124ef2cfbb30" name="默认变更列表" comment="默认变更列表">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/api-response.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/api-response.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/response_builder.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/response_builder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiResponse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiResponse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiResponseFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiResponseFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiResponseServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiResponseServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExceptionHandlers/MethodNotAllowedHttpExceptionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExceptionHandlers/MethodNotAllowedHttpExceptionHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/BackExceptionHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/BackExceptionHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ResponseHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResponseHandler.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;1317103248&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/haoqianlei/api-response.git&quot;,
+    &quot;accountId&quot;: &quot;11369319-8bf4-4eb1-a8de-210bc9d0da66&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/ApiResponse.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
@@ -36,6 +58,69 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.8482744843400213E-151" />
+      <entry key="S2" value="4.3632374548463287E-38" />
+      <entry key="S5" value="3.2946827222298877E-15" />
+      <entry key="S10" value="1.5892884956767403E-7" />
+      <entry key="S30" value="0.022881150376794526" />
+      <entry key="S60" value="0.45360843951721236" />
+      <entry key="M2" value="2.0982915402926214" />
+      <entry key="M5" value="5.914297026796471" />
+      <entry key="M10" value="8.872347919137493" />
+      <entry key="M15" value="10.276298246989587" />
+      <entry key="M30" value="12.630628452223581" />
+      <entry key="H1" value="18.144616680452113" />
+      <entry key="H2" value="27.899098673854205" />
+      <entry key="H4" value="37.76265068110605" />
+      <entry key="D1" value="50.69901388138049" />
+      <entry key="W1" value="53.511343209232834" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000362360264" />
+      <entry key="S2" value="1.0137970151696174" />
+      <entry key="S5" value="1.1802660973878514" />
+      <entry key="S10" value="1.4245775516767831" />
+      <entry key="S30" value="1.7515981044357345" />
+      <entry key="S60" value="1.8669475788280019" />
+      <entry key="M2" value="1.9311001980603386" />
+      <entry key="M5" value="1.9718484975886956" />
+      <entry key="M10" value="1.9858237659889801" />
+      <entry key="M15" value="1.990526705950983" />
+      <entry key="M30" value="1.995252081610977" />
+      <entry key="H1" value="1.9976232162550034" />
+      <entry key="H2" value="1.9988109011494635" />
+      <entry key="H4" value="1.9994052737250607" />
+      <entry key="D1" value="1.9999008543827914" />
+      <entry key="W1" value="1.999985835738534" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.0068011762757509715" />
+      <entry key="MS500" value="0.36856730963513507" />
+      <entry key="S2" value="0.787701905747226" />
+      <entry key="S5" value="1.0537810480285719" />
+      <entry key="S10" value="1.3370315217645494" />
+      <entry key="S30" value="1.734307760889129" />
+      <entry key="S60" value="2.298481985495847" />
+      <entry key="M2" value="4.017750860685731" />
+      <entry key="M5" value="7.88129022074267" />
+      <entry key="M10" value="10.85569431511185" />
+      <entry key="M15" value="12.265159494962734" />
+      <entry key="M30" value="14.6250385481" />
+      <entry key="H1" value="20.14181220866204" />
+      <entry key="H2" value="29.897690589804558" />
+      <entry key="H4" value="39.761943944598855" />
+      <entry key="D1" value="52.69889552354892" />
+      <entry key="W1" value="55.511326283554155" />
+    </decayedShown>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\software\phpstudy_pro\Extensions\php\php8.2.9nts\php.exe">
     <include_path>
@@ -174,42 +259,44 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php85" />
       <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/_laravel_idea" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="1teLHuarOdsDXW7qU2ew4Ym2agH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.laravel_idea.move_run_console_settings": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/software/phpstudy_pro/WWW/api-response",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.laravel_idea.move_run_console_settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/software/phpstudy_pro/WWW/api-response&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PS-261.26222.71" />
-        <option value="bundled-php-predefined-a98d8de5180a-6bbb74dbab74-com.jetbrains.php.sharedIndexes-PS-261.26222.71" />
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-PS-263.7307.215" />
+        <option value="bundled-php-predefined-a98d8de5180a-ec844a175cc0-com.jetbrains.php.sharedIndexes-PS-263.7307.215" />
       </set>
     </attachedChunks>
   </component>
@@ -236,6 +323,9 @@
       <workItem from="1667371049257" duration="1047000" />
       <workItem from="1675933055738" duration="899000" />
       <workItem from="1783931314409" duration="2445000" />
+      <workItem from="1783939360153" duration="1337000" />
+      <workItem from="1794565438188" duration="2325000" />
+      <workItem from="1794575604702" duration="742000" />
     </task>
     <servers />
   </component>

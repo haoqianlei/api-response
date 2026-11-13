@@ -1,2 +1,6 @@
 /vendor
-.github
+/.compat/
+/.phpunit.cache/
+/.phpunit.result.cache
+.idea
+tests
